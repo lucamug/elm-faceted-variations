@@ -1,7 +1,5 @@
 # Elm Faceted Variations
 
-SPA and SEO: Is Googlebot able to render a Single Page Application with Ajax calls?
-
 ## [Demo with Time-traveling Debugger]()
 
 ## How it works
