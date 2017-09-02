@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Variants Combinations Test v.1</title>
+    <style>
+        html,
+        textarea {
+            font-family: monospace;
+            font-size: 1em;
+        }
+
+        textarea {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="comments"></p>
+    <textarea id="result"></textarea>
+    <script>
+        function generateVariantsCombination(listOfList, temp, total) {
+            const list = listOfList.shift();
+            if (typeof list === "undefined") {
+                total.push(JSON.parse(JSON.stringify(temp)));
+            } else {
+                list.map(function(item) {
+                    temp.push(item);
+                    generateVariantsCombination(listOfList, temp, total)
+                    temp.pop();
+                });
+
+            }
+            listOfList.unshift(list);
+            return total;
+        }
+
+        const payload = {
+            "variantsTypes": [{
+                    "attribute": "Color",
+                    "variantValues": [
+                        "Red",
+                        "Green"
+                    ]
+                },
+                {
+                    "attribute": "Size",
+                    "variantValues": [
+                        "Small",
+                        "Medium",
+                        "Large"
+                    ]
+                },
+                {
+                    "attribute": "Material",
+                    "variantValues": [
+                        "Metal",
+                        "Wood",
+                        "Glass",
+                        "Plastic"
+                    ]
+                }
+            ],
+            "variants": []
+        };
+
+        temp = payload.variantsTypes.map(function(item) {
+            return item.variantValues;
+        })
+
+        temp2 = generateVariantsCombination(temp, [], []);
+
+        totalItems = temp2.length;
+        itemsRequested = 9;
+        itemsRequested = Math.min(totalItems, itemsRequested);
+        variants = [];
+        for (i = 0; i < itemsRequested; i++) {
+            index = Math.round(i * (totalItems / itemsRequested));
+            variants.push({
+                "id": String(index),
+                "variantValues": temp2[index],
+                "price": (1.90 + index % 10),
+                "available": 1 + (index % 10)
+
+            })
+        }
+        payload.variants = variants;
+        document.getElementById("comments").innerHTML = ["Total cobinations: ",
+            temp2.length,
+            "<br><br>Item requested: ",
+            itemsRequested,
+            "<br><br>Result: ",
+        ].join("\n");
+        document.getElementById("result").innerHTML = JSON.stringify(payload, null, ' ');
+    </script>
+</body>
+
+</html>

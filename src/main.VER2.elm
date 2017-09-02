@@ -1,6 +1,9 @@
 module Main exposing (..)
 
 {-
+   This is an experimental version that use IDs to create the
+   Dic structure
+
    To run this test:
 
    $ elm-live src/main.elm --open --debug

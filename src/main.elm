@@ -15,6 +15,7 @@ import Time
 import Task
 import Json.Decode
 import Json.Decode.Pipeline
+import Round
 
 
 (=>) : a -> b -> ( a, b )
@@ -124,12 +125,12 @@ viewItem model checkedStatus attribute value index =
             ]
 
 
-formatPrice : a -> String
+formatPrice : Float -> String
 formatPrice price =
-    (toString price) ++ " EUR"
+    "$" ++ (Round.round 2 price)
 
 
-formatPriceAndAvailability : Maybe { b | minPrice : a, maxPrice : a } -> String
+formatPriceAndAvailability : Maybe { b | minPrice : Float, maxPrice : Float } -> String
 formatPriceAndAvailability data =
     case data of
         Just data2 ->
@@ -137,27 +138,28 @@ formatPriceAndAvailability data =
             if data2.minPrice == data2.maxPrice then
                 (formatPrice data2.minPrice)
             else
-                (toString data2.minPrice) ++ " ~ " ++ (formatPrice data2.maxPrice)
+                (formatPrice data2.minPrice) ++ " ~ " ++ (formatPrice data2.maxPrice)
 
         Nothing ->
             "Out of stock"
 
 
-viewItemSection : Model -> VariantType -> Int -> List (Html Msg)
+viewItemSection : Model -> VariantType -> Int -> Html Msg
 viewItemSection model section index =
     let
         checked =
             Array.get index (Array.fromList model.variantSelected)
     in
-        [ h3 []
-            [ section.attribute
-                |> text
+        div
+            [ class "variant"
             ]
-        ]
-            ++ (List.map
+            [ h3 [] [ section.attribute |> text ]
+            , div []
+                (List.map
                     (\item -> viewItem model (checked == Just item) section.attribute item index)
                     (section.variantValues)
-               )
+                )
+            ]
 
 
 viewJsonForm : Model -> Html Msg
@@ -193,6 +195,14 @@ view model =
                         Nothing ->
                             0
 
+                stock =
+                    case presentData of
+                        Just data ->
+                            data.available
+
+                        Nothing ->
+                            0
+
                 ctaDisabled =
                     case presentData of
                         Just data ->
@@ -206,9 +216,9 @@ view model =
                     [ node "style" [] [ text css ]
                     , div [ class "header" ]
                         [ h1 []
-                            [ presentData |> formatPriceAndAvailability |> text
+                            [ presentData |> formatPriceAndAvailability |> (++) "Price " |> text
                             ]
-                        , p [] [ ((variationsQuantity |> toString) ++ " variants") |> text ]
+                        , p [] [ ("Variants: " ++ (variationsQuantity |> toString) ++ ", Stock: " ++ (stock |> toString)) |> text ]
                         , button
                             [ classList
                                 [ "cta" => True
@@ -216,10 +226,16 @@ view model =
                                 ]
                             , disabled ctaDisabled
                             ]
-                            [ text "Add to Cart" ]
+                            [ if ctaDisabled then
+                                text "Select a Product"
+                              else
+                                text "Add to Cart"
+                            ]
                         ]
-                    , div [ class "body" ]
-                        (List.concat (List.indexedMap (\index item -> (viewItemSection model item index)) payload.variantsTypes))
+                    , div
+                        [ class "body"
+                        ]
+                        (List.indexedMap (\index item -> (viewItemSection model item index)) payload.variantsTypes)
                     , div [ class "footer" ]
                         [ case model.error of
                             Nothing ->
@@ -230,6 +246,11 @@ view model =
                                     [ h4 [] [ "Error" |> text ]
                                     , p [] [ text data ]
                                     ]
+                        , ul []
+                            [ li [] [ a [ href "https://github.com/lucamug/elm-faceted-variations" ] [ text "Source Code" ] ]
+                            , li [] [ a [ href "" ] [ text "Post" ] ]
+                            , li [] [ a [ href "combinationGenerator.html" ] [ text "Combination Generator" ] ]
+                            ]
                         ]
                     ]
 
@@ -542,6 +563,10 @@ body {
     font-family: sans-serif;
     background-color: #ddd;
 }
+a {
+    text-decoration: none;
+    color: #ff73cc;
+}
 .main {
     max-width: 800px;
     margin: 0 auto;
@@ -560,11 +585,22 @@ body {
 }
 .body {
     background-color: #eee;
-    padding-top: 100px;
+    padding-top: 120px;
+    display: flex;
+    flex-direction: row;
+}
+@media screen and (max-width: 700px) {
+    .body {
+        flex-direction: column;
+    }
 }
 .footer {
     background-color: #eee;
     color: #aaa;
+}
+.variant {
+    flex: 1;
+    padding: 10px;
 }
 .viewItem {
     background-color: white;
@@ -574,11 +610,11 @@ body {
     border: 3px solid white;
 }
 .cta {
-    background-color: #82c2e2;
+    background-color: #ff73cc;
     color: white;
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 20px;
+    right: 40px;
     font-size: 1.0em;
     border-width: 0;
     padding: 12px 24px;
@@ -595,8 +631,8 @@ body {
     cursor: not-allowed;
 }
 .checked {
-    background-color: #e4f3fb;
-    border-color: #82c2e2;
+    background-color: #ff73cc;
+    color: white;
 }
 h1 {
     font-size: 1.2em;
@@ -624,51 +660,122 @@ json : String
 json =
     """
 {
-    "variantsTypes": [
-        {
-            "attribute": "Color",
-            "variantValues": [
-                "Red",
-                "Green"
-            ]
-        },
-        {
-            "attribute": "Size",
-            "variantValues": [
-                "Small",
-                "Medium",
-                "Large"
-            ]
-        }
-    ],
-    "variants": [
-        {
-            "id": "0",
-            "variantValues": [
-                "Red",
-                "Small"
-            ],
-            "price": 1.99,
-            "available": 1
-        },
-        {
-            "id": "1",
-            "variantValues": [
-                "Green",
-                "Small"
-            ],
-            "price": 2.99,
-            "available": 10
-        },
-        {
-            "id": "2",
-            "variantValues": [
-                "Red",
-                "Large"
-            ],
-            "price": 3.99,
-            "available": 100
-        }
-    ]
-}
-"""
+ "variantsTypes": [
+  {
+   "attribute": "Color",
+   "variantValues": [
+    "Red",
+    "Green"
+   ]
+  },
+  {
+   "attribute": "Size",
+   "variantValues": [
+    "Small",
+    "Medium",
+    "Large"
+   ]
+  },
+  {
+   "attribute": "Material",
+   "variantValues": [
+    "Metal",
+    "Wood",
+    "Glass",
+    "Plastic"
+   ]
+  }
+ ],
+ "variants": [
+  {
+   "id": "0",
+   "variantValues": [
+    "Red",
+    "Small",
+    "Metal"
+   ],
+   "price": 1.9,
+   "available": 1
+  },
+  {
+   "id": "3",
+   "variantValues": [
+    "Red",
+    "Small",
+    "Plastic"
+   ],
+   "price": 4.9,
+   "available": 4
+  },
+  {
+   "id": "5",
+   "variantValues": [
+    "Red",
+    "Medium",
+    "Wood"
+   ],
+   "price": 6.9,
+   "available": 6
+  },
+  {
+   "id": "8",
+   "variantValues": [
+    "Red",
+    "Large",
+    "Metal"
+   ],
+   "price": 9.9,
+   "available": 9
+  },
+  {
+   "id": "11",
+   "variantValues": [
+    "Red",
+    "Large",
+    "Plastic"
+   ],
+   "price": 2.9,
+   "available": 2
+  },
+  {
+   "id": "13",
+   "variantValues": [
+    "Green",
+    "Small",
+    "Wood"
+   ],
+   "price": 4.9,
+   "available": 4
+  },
+  {
+   "id": "16",
+   "variantValues": [
+    "Green",
+    "Medium",
+    "Metal"
+   ],
+   "price": 7.9,
+   "available": 7
+  },
+  {
+   "id": "19",
+   "variantValues": [
+    "Green",
+    "Medium",
+    "Plastic"
+   ],
+   "price": 10.9,
+   "available": 10
+  },
+  {
+   "id": "21",
+   "variantValues": [
+    "Green",
+    "Large",
+    "Wood"
+   ],
+   "price": 2.9,
+   "available": 2
+  }
+ ]
+}"""

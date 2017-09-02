@@ -12670,17 +12670,216 @@ var _elm_lang$html$Html_Events$Options = F2(
 	function (a, b) {
 		return {stopPropagation: a, preventDefault: b};
 	});
-var _user$project$Main$json = '\n{\n    \"variantsTypes\": [\n        {\n            \"attribute\": \"Color\",\n            \"variantValues\": [\n                \"Red\",\n                \"Green\"\n            ]\n        },\n        {\n            \"attribute\": \"Size\",\n            \"variantValues\": [\n                \"Small\",\n                \"Medium\",\n                \"Large\"\n            ]\n        }\n    ],\n    \"variants\": [\n        {\n            \"id\": \"id0\",\n            \"variantValues\": [\n                \"Red\",\n                \"Small\"\n            ],\n            \"price\": 1.99,\n            \"available\": 1\n        },\n        {\n            \"id\": \"id1\",\n            \"variantValues\": [\n                \"Green\",\n                \"Small\"\n            ],\n            \"price\": 2.99,\n            \"available\": 10\n        },\n        {\n            \"id\": \"id2\",\n            \"variantValues\": [\n                \"Red\",\n                \"Large\"\n            ],\n            \"price\": 3.99,\n            \"available\": 100\n        }\n    ]\n}\n';
-var _user$project$Main$css = '\nbody {\n    color: #888;\n    margin: 0;\n    font-family: sans-serif;\n    background-color: #ddd;\n}\n.main {\n    max-width: 800px;\n    margin: 0 auto;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.header, .body, .footer {\n    padding: 12px;\n}\n.header {\n    background-color: white;\n    position: fixed;\n    border-bottom: 1px solid #ddd;\n    max-width: 776px;\n    width: 100%;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.body {\n    background-color: #eee;\n    padding-top: 100px;\n}\n.footer {\n    background-color: #eee;\n    color: #aaa;\n}\n.viewItem {\n    background-color: white;\n    padding: 6px;\n    margin: 6px 0;\n    cursor: pointer;\n    border: 3px solid white;\n}\n.cta {\n    background-color: #82c2e2;\n    color: white;\n    position: absolute;\n    top: 12px;\n    right: 12px;\n    font-size: 1.0em;\n    border-width: 0;\n    padding: 12px 24px;\n    border-radius: 25px;\n}\n.cta.disabled {\n    background-color: #ddd;\n    color: #aaa;\n}\n.viewItem.disabled {\n    background-color: #ddd;\n    border-color: #ddd;\n    color: #ccc;\n    cursor: not-allowed;\n}\n.checked {\n    background-color: #e4f3fb;\n    border-color: #82c2e2;\n}\nh1 {\n    font-size: 1.2em;\n}\nh3 {\n    margin: 16px 0 0 6px;\n    color: #888;\n}\n.right {\n    float: right;\n}\ntextarea {\n    font-family: monospace;\n    width: 100%;\n    font-size: 1em;\n    height: 600px;\n}\n.error {\n    color: red;\n}\n';
-var _user$project$Main$transform2 = F2(
-	function (id, list) {
+var _myrho$elm_round$Round$funNum = F3(
+	function (fun, s, fl) {
 		return A2(
-			_elm_lang$core$List$map,
-			function (item) {
-				return {ctor: '_Tuple2', _0: item, _1: id};
-			},
-			list);
+			_elm_lang$core$Maybe$withDefault,
+			1 / 0,
+			_elm_lang$core$Result$toMaybe(
+				_elm_lang$core$String$toFloat(
+					A2(fun, s, fl))));
 	});
+var _myrho$elm_round$Round$splitComma = function (str) {
+	var _p0 = A2(_elm_lang$core$String$split, '.', str);
+	if (_p0.ctor === '::') {
+		if (_p0._1.ctor === '::') {
+			return {ctor: '_Tuple2', _0: _p0._0, _1: _p0._1._0};
+		} else {
+			return {ctor: '_Tuple2', _0: _p0._0, _1: '0'};
+		}
+	} else {
+		return {ctor: '_Tuple2', _0: '0', _1: '0'};
+	}
+};
+var _myrho$elm_round$Round$toDecimal = function (fl) {
+	var _p1 = A2(
+		_elm_lang$core$String$split,
+		'e',
+		_elm_lang$core$Basics$toString(fl));
+	if (_p1.ctor === '::') {
+		if (_p1._1.ctor === '::') {
+			var _p4 = _p1._1._0;
+			var _p2 = function () {
+				var hasSign = _elm_lang$core$Native_Utils.cmp(fl, 0) < 0;
+				var _p3 = _myrho$elm_round$Round$splitComma(_p1._0);
+				var b = _p3._0;
+				var a = _p3._1;
+				return {
+					ctor: '_Tuple3',
+					_0: hasSign ? '-' : '',
+					_1: hasSign ? A2(_elm_lang$core$String$dropLeft, 1, b) : b,
+					_2: a
+				};
+			}();
+			var sign = _p2._0;
+			var before = _p2._1;
+			var after = _p2._2;
+			var e = A2(
+				_elm_lang$core$Maybe$withDefault,
+				0,
+				_elm_lang$core$Result$toMaybe(
+					_elm_lang$core$String$toInt(
+						A2(_elm_lang$core$String$startsWith, '+', _p4) ? A2(_elm_lang$core$String$dropLeft, 1, _p4) : _p4)));
+			var newBefore = (_elm_lang$core$Native_Utils.cmp(e, 0) > -1) ? before : ((_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$Basics$abs(e),
+				_elm_lang$core$String$length(before)) < 0) ? A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(
+					_elm_lang$core$String$left,
+					_elm_lang$core$String$length(before) - _elm_lang$core$Basics$abs(e),
+					before),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'.',
+					A2(
+						_elm_lang$core$String$right,
+						_elm_lang$core$Basics$abs(e),
+						before))) : A2(
+				_elm_lang$core$Basics_ops['++'],
+				'0.',
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(
+						_elm_lang$core$String$repeat,
+						_elm_lang$core$Basics$abs(e) - _elm_lang$core$String$length(before),
+						'0'),
+					before)));
+			var newAfter = (_elm_lang$core$Native_Utils.cmp(e, 0) < 1) ? after : ((_elm_lang$core$Native_Utils.cmp(
+				e,
+				_elm_lang$core$String$length(after)) < 0) ? A2(
+				_elm_lang$core$Basics_ops['++'],
+				A2(_elm_lang$core$String$left, e, after),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'.',
+					A2(
+						_elm_lang$core$String$right,
+						_elm_lang$core$String$length(after) - e,
+						after))) : A2(
+				_elm_lang$core$Basics_ops['++'],
+				after,
+				A2(
+					_elm_lang$core$String$repeat,
+					e - _elm_lang$core$String$length(after),
+					'0')));
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				sign,
+				A2(_elm_lang$core$Basics_ops['++'], newBefore, newAfter));
+		} else {
+			return _p1._0;
+		}
+	} else {
+		return '';
+	}
+};
+var _myrho$elm_round$Round$truncate = function (n) {
+	return (_elm_lang$core$Native_Utils.cmp(n, 0) < 0) ? _elm_lang$core$Basics$ceiling(n) : _elm_lang$core$Basics$floor(n);
+};
+var _myrho$elm_round$Round$roundFun = F3(
+	function (functor, s, fl) {
+		if (_elm_lang$core$Native_Utils.eq(s, 0)) {
+			return _elm_lang$core$Basics$toString(
+				functor(fl));
+		} else {
+			if (_elm_lang$core$Native_Utils.cmp(s, 0) < 0) {
+				return function (r) {
+					return (!_elm_lang$core$Native_Utils.eq(r, '0')) ? A2(
+						_elm_lang$core$Basics_ops['++'],
+						r,
+						A2(
+							_elm_lang$core$String$repeat,
+							_elm_lang$core$Basics$abs(s),
+							'0')) : r;
+				}(
+					A3(
+						_myrho$elm_round$Round$roundFun,
+						functor,
+						0,
+						A2(
+							F2(
+								function (x, y) {
+									return x / y;
+								}),
+							fl,
+							A2(
+								F2(
+									function (x, y) {
+										return Math.pow(x, y);
+									}),
+								10,
+								_elm_lang$core$Basics$abs(
+									_elm_lang$core$Basics$toFloat(s))))));
+			} else {
+				var dd = (_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) ? 2 : 1;
+				var n = (_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) ? -1 : 1;
+				var e = Math.pow(10, s);
+				var _p5 = _myrho$elm_round$Round$splitComma(
+					_myrho$elm_round$Round$toDecimal(fl));
+				var before = _p5._0;
+				var after = _p5._1;
+				var a = A3(
+					_elm_lang$core$String$padRight,
+					s + 1,
+					_elm_lang$core$Native_Utils.chr('0'),
+					after);
+				var b = A2(_elm_lang$core$String$left, s, a);
+				var c = A2(_elm_lang$core$String$dropLeft, s, a);
+				var f = functor(
+					A2(
+						_elm_lang$core$Maybe$withDefault,
+						_elm_lang$core$Basics$toFloat(e),
+						_elm_lang$core$Result$toMaybe(
+							_elm_lang$core$String$toFloat(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									(_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) ? '-' : '',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'1',
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											b,
+											A2(_elm_lang$core$Basics_ops['++'], '.', c))))))));
+				var g = A2(
+					_elm_lang$core$String$dropLeft,
+					dd,
+					_elm_lang$core$Basics$toString(f));
+				var h = _myrho$elm_round$Round$truncate(fl) + (_elm_lang$core$Native_Utils.eq(f - (e * n), e * n) ? ((_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) ? -1 : 1) : 0);
+				var j = _elm_lang$core$Basics$toString(h);
+				var i = (_elm_lang$core$Native_Utils.eq(j, '0') && ((!_elm_lang$core$Native_Utils.eq(f - (e * n), 0)) && ((_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) && (_elm_lang$core$Native_Utils.cmp(fl, -1) > 0)))) ? A2(_elm_lang$core$Basics_ops['++'], '-', j) : j;
+				return A2(
+					_elm_lang$core$Basics_ops['++'],
+					i,
+					A2(_elm_lang$core$Basics_ops['++'], '.', g));
+			}
+		}
+	});
+var _myrho$elm_round$Round$round = _myrho$elm_round$Round$roundFun(_elm_lang$core$Basics$round);
+var _myrho$elm_round$Round$roundNum = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$round);
+var _myrho$elm_round$Round$ceiling = _myrho$elm_round$Round$roundFun(_elm_lang$core$Basics$ceiling);
+var _myrho$elm_round$Round$ceilingNum = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$ceiling);
+var _myrho$elm_round$Round$floor = _myrho$elm_round$Round$roundFun(_elm_lang$core$Basics$floor);
+var _myrho$elm_round$Round$floorCom = F2(
+	function (s, fl) {
+		return (_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) ? A2(_myrho$elm_round$Round$ceiling, s, fl) : A2(_myrho$elm_round$Round$floor, s, fl);
+	});
+var _myrho$elm_round$Round$floorNumCom = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$floorCom);
+var _myrho$elm_round$Round$ceilingCom = F2(
+	function (s, fl) {
+		return (_elm_lang$core$Native_Utils.cmp(fl, 0) < 0) ? A2(_myrho$elm_round$Round$floor, s, fl) : A2(_myrho$elm_round$Round$ceiling, s, fl);
+	});
+var _myrho$elm_round$Round$ceilingNumCom = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$ceilingCom);
+var _myrho$elm_round$Round$floorNum = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$floor);
+var _myrho$elm_round$Round$roundCom = _myrho$elm_round$Round$roundFun(
+	function (fl) {
+		var dec = fl - _elm_lang$core$Basics$toFloat(
+			_myrho$elm_round$Round$truncate(fl));
+		return (_elm_lang$core$Native_Utils.cmp(dec, 0.5) > -1) ? _elm_lang$core$Basics$ceiling(fl) : ((_elm_lang$core$Native_Utils.cmp(dec, -0.5) < 1) ? _elm_lang$core$Basics$floor(fl) : _elm_lang$core$Basics$round(fl));
+	});
+var _myrho$elm_round$Round$roundNumCom = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$roundCom);
+var _user$project$Main$json = '\n{\n \"variantsTypes\": [\n  {\n   \"attribute\": \"Color\",\n   \"variantValues\": [\n    \"Red\",\n    \"Green\"\n   ]\n  },\n  {\n   \"attribute\": \"Size\",\n   \"variantValues\": [\n    \"Small\",\n    \"Medium\",\n    \"Large\"\n   ]\n  },\n  {\n   \"attribute\": \"Material\",\n   \"variantValues\": [\n    \"Metal\",\n    \"Wood\",\n    \"Glass\",\n    \"Plastic\"\n   ]\n  }\n ],\n \"variants\": [\n  {\n   \"id\": \"0\",\n   \"variantValues\": [\n    \"Red\",\n    \"Small\",\n    \"Metal\"\n   ],\n   \"price\": 1.9,\n   \"available\": 1\n  },\n  {\n   \"id\": \"3\",\n   \"variantValues\": [\n    \"Red\",\n    \"Small\",\n    \"Plastic\"\n   ],\n   \"price\": 4.9,\n   \"available\": 4\n  },\n  {\n   \"id\": \"5\",\n   \"variantValues\": [\n    \"Red\",\n    \"Medium\",\n    \"Wood\"\n   ],\n   \"price\": 6.9,\n   \"available\": 6\n  },\n  {\n   \"id\": \"8\",\n   \"variantValues\": [\n    \"Red\",\n    \"Large\",\n    \"Metal\"\n   ],\n   \"price\": 9.9,\n   \"available\": 9\n  },\n  {\n   \"id\": \"11\",\n   \"variantValues\": [\n    \"Red\",\n    \"Large\",\n    \"Plastic\"\n   ],\n   \"price\": 2.9,\n   \"available\": 2\n  },\n  {\n   \"id\": \"13\",\n   \"variantValues\": [\n    \"Green\",\n    \"Small\",\n    \"Wood\"\n   ],\n   \"price\": 4.9,\n   \"available\": 4\n  },\n  {\n   \"id\": \"16\",\n   \"variantValues\": [\n    \"Green\",\n    \"Medium\",\n    \"Metal\"\n   ],\n   \"price\": 7.9,\n   \"available\": 7\n  },\n  {\n   \"id\": \"19\",\n   \"variantValues\": [\n    \"Green\",\n    \"Medium\",\n    \"Plastic\"\n   ],\n   \"price\": 10.9,\n   \"available\": 10\n  },\n  {\n   \"id\": \"21\",\n   \"variantValues\": [\n    \"Green\",\n    \"Large\",\n    \"Wood\"\n   ],\n   \"price\": 2.9,\n   \"available\": 2\n  }\n ]\n}';
+var _user$project$Main$css = '\nbody {\n    color: #888;\n    margin: 0;\n    font-family: sans-serif;\n    background-color: #ddd;\n}\na {\n    text-decoration: none;\n    color: #ff73cc;\n}\n.main {\n    max-width: 800px;\n    margin: 0 auto;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.header, .body, .footer {\n    padding: 12px;\n}\n.header {\n    background-color: white;\n    position: fixed;\n    border-bottom: 1px solid #ddd;\n    max-width: 776px;\n    width: 100%;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.body {\n    background-color: #eee;\n    padding-top: 120px;\n    display: flex;\n    flex-direction: row;\n}\n@media screen and (max-width: 700px) {\n    .body {\n        flex-direction: column;\n    }\n}\n.footer {\n    background-color: #eee;\n    color: #aaa;\n}\n.variant {\n    flex: 1;\n    padding: 10px;\n}\n.viewItem {\n    background-color: white;\n    padding: 6px;\n    margin: 6px 0;\n    cursor: pointer;\n    border: 3px solid white;\n}\n.cta {\n    background-color: #ff73cc;\n    color: white;\n    position: absolute;\n    top: 20px;\n    right: 40px;\n    font-size: 1.0em;\n    border-width: 0;\n    padding: 12px 24px;\n    border-radius: 25px;\n}\n.cta.disabled {\n    background-color: #ddd;\n    color: #aaa;\n}\n.viewItem.disabled {\n    background-color: #ddd;\n    border-color: #ddd;\n    color: #ccc;\n    cursor: not-allowed;\n}\n.checked {\n    background-color: #ff73cc;\n    color: white;\n}\nh1 {\n    font-size: 1.2em;\n}\nh3 {\n    margin: 16px 0 0 6px;\n    color: #888;\n}\n.right {\n    float: right;\n}\ntextarea {\n    font-family: monospace;\n    width: 100%;\n    font-size: 1em;\n    height: 600px;\n}\n.error {\n    color: red;\n}\n';
 var _user$project$Main$transform1 = F2(
 	function (object, list) {
 		return A2(
@@ -12736,21 +12935,6 @@ var _user$project$Main$listToListOfList = function (list) {
 		},
 		list);
 };
-var _user$project$Main$prepareVariantValues2 = function (variants) {
-	return A2(
-		_elm_lang$core$List$indexedMap,
-		F2(
-			function (index, variant) {
-				return A2(
-					_user$project$Main$transform1,
-					index,
-					A2(
-						_user$project$Main$generateVariantsCombination,
-						{ctor: '[]'},
-						_user$project$Main$listToListOfList(variant.variantValues)));
-			}),
-		variants);
-};
 var _user$project$Main$prepareVariantValues = function (variants) {
 	return A2(
 		_elm_lang$core$List$map,
@@ -12787,8 +12971,8 @@ var _user$project$Main$initModel = {
 var _user$project$Main$formatPrice = function (price) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
-		_elm_lang$core$Basics$toString(price),
-		' EUR');
+		'$',
+		A2(_myrho$elm_round$Round$round, 2, price));
 };
 var _user$project$Main$formatPriceAndAvailability = function (data) {
 	var _p2 = data;
@@ -12796,7 +12980,7 @@ var _user$project$Main$formatPriceAndAvailability = function (data) {
 		var _p3 = _p2._0;
 		return _elm_lang$core$Native_Utils.eq(_p3.minPrice, _p3.maxPrice) ? _user$project$Main$formatPrice(_p3.minPrice) : A2(
 			_elm_lang$core$Basics_ops['++'],
-			_elm_lang$core$Basics$toString(_p3.minPrice),
+			_user$project$Main$formatPrice(_p3.minPrice),
 			A2(
 				_elm_lang$core$Basics_ops['++'],
 				' ~ ',
@@ -13019,7 +13203,7 @@ var _user$project$Main$update = F2(
 					var _p15 = A2(
 						_elm_lang$core$Debug$log,
 						'after',
-						_user$project$Main$prepareVariantValues2(_p16.variants));
+						_user$project$Main$prepareVariantValues(_p16.variants));
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
@@ -13116,7 +13300,12 @@ var _user$project$Main$viewItemSection = F3(
 			index,
 			_elm_lang$core$Array$fromList(model.variantSelected));
 		return A2(
-			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('variant'),
+				_1: {ctor: '[]'}
+			},
 			{
 				ctor: '::',
 				_0: A2(
@@ -13127,22 +13316,28 @@ var _user$project$Main$viewItemSection = F3(
 						_0: _elm_lang$html$Html$text(section.attribute),
 						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
-			},
-			A2(
-				_elm_lang$core$List$map,
-				function (item) {
-					return A5(
-						_user$project$Main$viewItem,
-						model,
-						_elm_lang$core$Native_Utils.eq(
-							checked,
-							_elm_lang$core$Maybe$Just(item)),
-						section.attribute,
-						item,
-						index);
-				},
-				section.variantValues));
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						A2(
+							_elm_lang$core$List$map,
+							function (item) {
+								return A5(
+									_user$project$Main$viewItem,
+									model,
+									_elm_lang$core$Native_Utils.eq(
+										checked,
+										_elm_lang$core$Maybe$Just(item)),
+									section.attribute,
+									item,
+									index);
+							},
+							section.variantValues)),
+					_1: {ctor: '[]'}
+				}
+			});
 	});
 var _user$project$Main$view = function (model) {
 	var _p17 = model.payload;
@@ -13185,11 +13380,19 @@ var _user$project$Main$view = function (model) {
 				return 0;
 			}
 		}();
-		var ctaDisabled = function () {
+		var stock = function () {
 			var _p19 = presentData;
 			if (_p19.ctor === 'Just') {
+				return _p19._0.available;
+			} else {
+				return 0;
+			}
+		}();
+		var ctaDisabled = function () {
+			var _p20 = presentData;
+			if (_p20.ctor === 'Just') {
 				return _elm_lang$core$Native_Utils.cmp(
-					_elm_lang$core$List$length(_p19._0.ids),
+					_elm_lang$core$List$length(_p20._0.ids),
 					1) > 0;
 			} else {
 				return true;
@@ -13230,7 +13433,13 @@ var _user$project$Main$view = function (model) {
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html$text(
-										_user$project$Main$formatPriceAndAvailability(presentData)),
+										A2(
+											F2(
+												function (x, y) {
+													return A2(_elm_lang$core$Basics_ops['++'], x, y);
+												}),
+											'Price ',
+											_user$project$Main$formatPriceAndAvailability(presentData))),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -13243,8 +13452,14 @@ var _user$project$Main$view = function (model) {
 										_0: _elm_lang$html$Html$text(
 											A2(
 												_elm_lang$core$Basics_ops['++'],
-												_elm_lang$core$Basics$toString(variationsQuantity),
-												' variants')),
+												'Variants: ',
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													_elm_lang$core$Basics$toString(variationsQuantity),
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														', Stock: ',
+														_elm_lang$core$Basics$toString(stock))))),
 										_1: {ctor: '[]'}
 									}),
 								_1: {
@@ -13271,7 +13486,7 @@ var _user$project$Main$view = function (model) {
 										},
 										{
 											ctor: '::',
-											_0: _elm_lang$html$Html$text('Add to Cart'),
+											_0: ctaDisabled ? _elm_lang$html$Html$text('Select a Product') : _elm_lang$html$Html$text('Add to Cart'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -13287,14 +13502,13 @@ var _user$project$Main$view = function (model) {
 								_0: _elm_lang$html$Html_Attributes$class('body'),
 								_1: {ctor: '[]'}
 							},
-							_elm_lang$core$List$concat(
-								A2(
-									_elm_lang$core$List$indexedMap,
-									F2(
-										function (index, item) {
-											return A3(_user$project$Main$viewItemSection, model, item, index);
-										}),
-									_p17._0.variantsTypes))),
+							A2(
+								_elm_lang$core$List$indexedMap,
+								F2(
+									function (index, item) {
+										return A3(_user$project$Main$viewItemSection, model, item, index);
+									}),
+								_p17._0.variantsTypes)),
 						_1: {
 							ctor: '::',
 							_0: A2(
@@ -13307,8 +13521,8 @@ var _user$project$Main$view = function (model) {
 								{
 									ctor: '::',
 									_0: function () {
-										var _p20 = model.error;
-										if (_p20.ctor === 'Nothing') {
+										var _p21 = model.error;
+										if (_p21.ctor === 'Nothing') {
 											return _elm_lang$html$Html$text('');
 										} else {
 											return A2(
@@ -13335,7 +13549,7 @@ var _user$project$Main$view = function (model) {
 															{ctor: '[]'},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text(_p20._0),
+																_0: _elm_lang$html$Html$text(_p21._0),
 																_1: {ctor: '[]'}
 															}),
 														_1: {ctor: '[]'}
@@ -13343,7 +13557,80 @@ var _user$project$Main$view = function (model) {
 												});
 										}
 									}(),
-									_1: {ctor: '[]'}
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$ul,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$li,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$a,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$href('https://github.com/lucamug/elm-faceted-variations'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Source Code'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$li,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$a,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$href(''),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Post'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$li,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$a,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$href('combinationGenerator.html'),
+																		_1: {ctor: '[]'}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Combination Generator'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}),
 							_1: {ctor: '[]'}
 						}
