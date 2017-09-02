@@ -313,7 +313,7 @@ view model =
                                     ]
                         , ul []
                             [ li [] [ a [ href "https://github.com/lucamug/elm-faceted-variations" ] [ text "Source Code" ] ]
-                            , li [] [ a [ href "" ] [ text "Post" ] ]
+                            , li [] [ a [ href "https://medium.com/@l.mugnaini/faceted-variants-in-elm-c38b4d661355" ] [ text "Post" ] ]
                             , li [] [ a [ href "https://lucamug.github.io/elm-faceted-variations/" ] [ text "Demo" ] ]
                             , li [] [ a [ href "https://lucamug.github.io/elm-faceted-variations/combinationGenerator.html" ] [ text "Combination Generator" ] ]
                             ]
