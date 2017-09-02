@@ -12879,7 +12879,7 @@ var _myrho$elm_round$Round$roundCom = _myrho$elm_round$Round$roundFun(
 	});
 var _myrho$elm_round$Round$roundNumCom = _myrho$elm_round$Round$funNum(_myrho$elm_round$Round$roundCom);
 var _user$project$Main$json = '\n{\n \"variantsTypes\": [\n  {\n   \"attribute\": \"Color\",\n   \"variantValues\": [\n    \"Red\",\n    \"Green\"\n   ]\n  },\n  {\n   \"attribute\": \"Size\",\n   \"variantValues\": [\n    \"Small\",\n    \"Medium\",\n    \"Large\"\n   ]\n  },\n  {\n   \"attribute\": \"Material\",\n   \"variantValues\": [\n    \"Metal\",\n    \"Wood\",\n    \"Glass\",\n    \"Plastic\"\n   ]\n  }\n ],\n \"variants\": [\n  {\n   \"id\": \"0\",\n   \"variantValues\": [\n    \"Red\",\n    \"Small\",\n    \"Metal\"\n   ],\n   \"price\": 1.9,\n   \"available\": 1\n  },\n  {\n   \"id\": \"3\",\n   \"variantValues\": [\n    \"Red\",\n    \"Small\",\n    \"Plastic\"\n   ],\n   \"price\": 4.9,\n   \"available\": 4\n  },\n  {\n   \"id\": \"5\",\n   \"variantValues\": [\n    \"Red\",\n    \"Medium\",\n    \"Wood\"\n   ],\n   \"price\": 6.9,\n   \"available\": 6\n  },\n  {\n   \"id\": \"8\",\n   \"variantValues\": [\n    \"Red\",\n    \"Large\",\n    \"Metal\"\n   ],\n   \"price\": 9.9,\n   \"available\": 9\n  },\n  {\n   \"id\": \"11\",\n   \"variantValues\": [\n    \"Red\",\n    \"Large\",\n    \"Plastic\"\n   ],\n   \"price\": 2.9,\n   \"available\": 2\n  },\n  {\n   \"id\": \"13\",\n   \"variantValues\": [\n    \"Green\",\n    \"Small\",\n    \"Wood\"\n   ],\n   \"price\": 4.9,\n   \"available\": 4\n  },\n  {\n   \"id\": \"16\",\n   \"variantValues\": [\n    \"Green\",\n    \"Medium\",\n    \"Metal\"\n   ],\n   \"price\": 7.9,\n   \"available\": 7\n  },\n  {\n   \"id\": \"19\",\n   \"variantValues\": [\n    \"Green\",\n    \"Medium\",\n    \"Plastic\"\n   ],\n   \"price\": 10.9,\n   \"available\": 10\n  },\n  {\n   \"id\": \"21\",\n   \"variantValues\": [\n    \"Green\",\n    \"Large\",\n    \"Wood\"\n   ],\n   \"price\": 2.9,\n   \"available\": 2\n  }\n ]\n}';
-var _user$project$Main$css = '\nbody {\n    color: #888;\n    margin: 0;\n    font-family: sans-serif;\n    background-color: #ddd;\n}\na {\n    text-decoration: none;\n    color: #ff73cc;\n}\n.main {\n    max-width: 800px;\n    margin: 0 auto;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.header, .body, .footer {\n    padding: 12px;\n}\n.header {\n    background-color: white;\n    position: fixed;\n    border-bottom: 1px solid #ddd;\n    max-width: 776px;\n    width: 100%;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.body {\n    background-color: #eee;\n    padding-top: 120px;\n    display: flex;\n    flex-direction: row;\n}\n@media screen and (max-width: 700px) {\n    .body {\n        flex-direction: column;\n    }\n}\n.footer {\n    background-color: #eee;\n    color: #aaa;\n}\n.variant {\n    flex: 1;\n    padding: 10px;\n}\n.viewItem {\n    background-color: white;\n    padding: 6px;\n    margin: 6px 0;\n    cursor: pointer;\n    border: 3px solid white;\n}\n.cta {\n    background-color: #ff73cc;\n    color: white;\n    position: absolute;\n    top: 20px;\n    right: 40px;\n    font-size: 1.0em;\n    border-width: 0;\n    padding: 12px 24px;\n    border-radius: 25px;\n}\n.cta.disabled {\n    background-color: #ddd;\n    color: #aaa;\n}\n.viewItem.disabled {\n    background-color: #ddd;\n    border-color: #ddd;\n    color: #ccc;\n    cursor: not-allowed;\n}\n.checked {\n    background-color: #ff73cc;\n    color: white;\n}\nh1 {\n    font-size: 1.2em;\n}\nh3 {\n    margin: 16px 0 0 6px;\n    color: #888;\n}\n.right {\n    float: right;\n}\ntextarea {\n    font-family: monospace;\n    width: 100%;\n    font-size: 1em;\n    height: 600px;\n}\n.error {\n    color: red;\n}\n';
+var _user$project$Main$css = '\nbody {\n    color: #888;\n    margin: 0;\n    font-family: sans-serif;\n    background-color: #ddd;\n}\na {\n    text-decoration: none;\n    color: #ff73cc;\n}\n.main {\n    max-width: 800px;\n    margin: 0 auto;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.header, .body, .footer {\n    padding: 12px;\n}\n.header {\n    background-color: white;\n    position: fixed;\n    border-bottom: 1px solid #ddd;\n    max-width: 776px;\n    width: 100%;\n    box-shadow: 0px 5px 20px 0px hsla(0, 0%, 0%, 0.16);\n}\n.body {\n    background-color: #eee;\n    padding-top: 120px;\n    display: flex;\n    flex-direction: row;\n}\n@media screen and (max-width: 700px) {\n    .body {\n        flex-direction: column;\n    }\n}\n.footer {\n    background-color: #eee;\n    color: #aaa;\n}\n.variant {\n    flex: 1;\n    padding: 10px;\n}\n.viewItem {\n    background-color: white;\n    padding: 6px;\n    margin: 6px 0;\n    cursor: pointer;\n    border: 3px solid white;\n}\n.selected {\n    background-color: #ff73cc;\n    color: white;\n    padding: 3px 6px;\n    margin: 0 2px;\n}\n.cta {\n    background-color: #ff73cc;\n    color: white;\n    position: absolute;\n    top: 20px;\n    right: 40px;\n    font-size: 1.0em;\n    border-width: 0;\n    padding: 12px 24px;\n    border-radius: 25px;\n}\n.cta.disabled {\n    background-color: #ddd;\n    color: #aaa;\n}\n.viewItem.disabled {\n    background-color: #ddd;\n    border-color: #ddd;\n    color: #ccc;\n    cursor: not-allowed;\n}\n.checked {\n    background-color: #ff73cc;\n    color: white;\n}\nh1 {\n    font-size: 1.2em;\n}\nh3 {\n    margin: 16px 0 0 6px;\n    color: #888;\n}\n.right {\n    float: right;\n}\ntextarea {\n    font-family: monospace;\n    width: 100%;\n    font-size: 1em;\n    height: 600px;\n}\n.error {\n    color: red;\n}\n';
 var _user$project$Main$transform1 = F2(
 	function (object, list) {
 		return A2(
@@ -12968,26 +12968,54 @@ var _user$project$Main$initModel = {
 	payloadJson: _user$project$Main$json,
 	payload: _elm_lang$core$Maybe$Nothing
 };
+var _user$project$Main$findVariant = F2(
+	function (variants, id) {
+		return _elm_lang$core$List$head(
+			A2(
+				_elm_lang$core$List$filter,
+				function (item) {
+					return _elm_lang$core$Native_Utils.eq(item.id, id);
+				},
+				variants));
+	});
 var _user$project$Main$formatPrice = function (price) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
 		'$',
 		A2(_myrho$elm_round$Round$round, 2, price));
 };
-var _user$project$Main$formatPriceAndAvailability = function (data) {
-	var _p2 = data;
-	if (_p2.ctor === 'Just') {
-		var _p3 = _p2._0;
-		return _elm_lang$core$Native_Utils.eq(_p3.minPrice, _p3.maxPrice) ? _user$project$Main$formatPrice(_p3.minPrice) : A2(
+var _user$project$Main$formatPriceAndAvailability = function (variantCombination) {
+	return (_elm_lang$core$Native_Utils.cmp(variantCombination.available, 0) > 0) ? (_elm_lang$core$Native_Utils.eq(variantCombination.minPrice, variantCombination.maxPrice) ? _user$project$Main$formatPrice(variantCombination.minPrice) : A2(
+		_elm_lang$core$Basics_ops['++'],
+		_user$project$Main$formatPrice(variantCombination.minPrice),
+		A2(
 			_elm_lang$core$Basics_ops['++'],
-			_user$project$Main$formatPrice(_p3.minPrice),
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				' ~ ',
-				_user$project$Main$formatPrice(_p3.maxPrice)));
+			' ~ ',
+			_user$project$Main$formatPrice(variantCombination.maxPrice)))) : 'Out of stock';
+};
+var _user$project$Main$emptyVariantCombination = {
+	minPrice: 0,
+	maxPrice: 0,
+	available: 0,
+	ids: {ctor: '[]'}
+};
+var _user$project$Main$emptyPayload = {
+	variantsTypes: {ctor: '[]'},
+	variants: {ctor: '[]'}
+};
+var _user$project$Main$getPayload = function (payload) {
+	var _p2 = payload;
+	if (_p2.ctor === 'Just') {
+		return _p2._0;
 	} else {
-		return 'Out of stock';
+		return _user$project$Main$emptyPayload;
 	}
+};
+var _user$project$Main$emptyVariant = {
+	id: '',
+	variantValues: {ctor: '[]'},
+	price: 0,
+	available: 0
 };
 var _user$project$Main_ops = _user$project$Main_ops || {};
 _user$project$Main_ops['=>'] = F2(
@@ -13050,37 +13078,37 @@ var _user$project$Main$VariantCombination = F4(
 		return {minPrice: a, maxPrice: b, available: c, ids: d};
 	});
 var _user$project$Main$addToDict = F2(
-	function (_p4, dict) {
-		var _p5 = _p4;
-		var _p9 = _p5._1;
-		var _p8 = _p5._0;
-		var _p6 = A2(_elm_lang$core$Dict$get, _p8, dict);
-		if (_p6.ctor === 'Just') {
-			var _p7 = _p6._0;
+	function (_p3, dict) {
+		var _p4 = _p3;
+		var _p8 = _p4._1;
+		var _p7 = _p4._0;
+		var _p5 = A2(_elm_lang$core$Dict$get, _p7, dict);
+		if (_p5.ctor === 'Just') {
+			var _p6 = _p5._0;
 			return A3(
 				_elm_lang$core$Dict$insert,
-				_p8,
+				_p7,
 				_elm_lang$core$Native_Utils.update(
-					_p7,
+					_p6,
 					{
-						minPrice: A2(_elm_lang$core$Basics$min, _p7.minPrice, _p9.price),
-						maxPrice: A2(_elm_lang$core$Basics$max, _p7.maxPrice, _p9.price),
-						available: _p7.available + _p9.available,
-						ids: {ctor: '::', _0: _p9.id, _1: _p7.ids}
+						minPrice: A2(_elm_lang$core$Basics$min, _p6.minPrice, _p8.price),
+						maxPrice: A2(_elm_lang$core$Basics$max, _p6.maxPrice, _p8.price),
+						available: _p6.available + _p8.available,
+						ids: {ctor: '::', _0: _p8.id, _1: _p6.ids}
 					}),
 				dict);
 		} else {
 			return A3(
 				_elm_lang$core$Dict$insert,
-				_p8,
+				_p7,
 				A4(
 					_user$project$Main$VariantCombination,
-					_p9.price,
-					_p9.price,
-					_p9.available,
+					_p8.price,
+					_p8.price,
+					_p8.available,
 					{
 						ctor: '::',
-						_0: _p9.id,
+						_0: _p8.id,
 						_1: {ctor: '[]'}
 					}),
 				dict);
@@ -13152,14 +13180,14 @@ var _user$project$Main$InitialiseVariants = function (a) {
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p10 = msg;
-		switch (_p10.ctor) {
+		var _p9 = msg;
+		switch (_p9.ctor) {
 			case 'NoOp':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'SwitchTo':
-				var _p11 = _p10._0;
-				var index = _p11._0;
-				var value = _p11._1;
+				var _p10 = _p9._0;
+				var index = _p10._0;
+				var value = _p10._1;
 				var newVariantSelected = A3(_user$project$Main$listSet, index, value, model.variantSelected);
 				return {
 					ctor: '_Tuple2',
@@ -13170,15 +13198,15 @@ var _user$project$Main$update = F2(
 				};
 			case 'DecodePayload':
 				var decoded = A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Main$decodePayload, model.payloadJson);
-				var _p12 = decoded;
-				if (_p12.ctor === 'Ok') {
+				var _p11 = decoded;
+				if (_p11.ctor === 'Ok') {
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
 								error: _elm_lang$core$Maybe$Nothing,
-								payload: _elm_lang$core$Maybe$Just(_p12._0)
+								payload: _elm_lang$core$Maybe$Just(_p11._0)
 							}),
 						_1: A2(_elm_lang$core$Task$perform, _user$project$Main$InitialiseVariants, _elm_lang$core$Time$now)
 					};
@@ -13188,22 +13216,22 @@ var _user$project$Main$update = F2(
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								error: _elm_lang$core$Maybe$Just(_p12._0)
+								error: _elm_lang$core$Maybe$Just(_p11._0)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
 			case 'InitialiseVariants':
-				var _p13 = model.payload;
-				if (_p13.ctor === 'Nothing') {
+				var _p12 = model.payload;
+				if (_p12.ctor === 'Nothing') {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
-					var _p16 = _p13._0;
-					var _p14 = A2(_elm_lang$core$Debug$log, 'before', _p16.variants);
-					var _p15 = A2(
+					var _p15 = _p12._0;
+					var _p13 = A2(_elm_lang$core$Debug$log, 'before', _p15.variants);
+					var _p14 = A2(
 						_elm_lang$core$Debug$log,
 						'after',
-						_user$project$Main$prepareVariantValues(_p16.variants));
+						_user$project$Main$prepareVariantValues(_p15.variants));
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
@@ -13213,12 +13241,12 @@ var _user$project$Main$update = F2(
 									_user$project$Main$updateDict,
 									_elm_lang$core$Dict$empty,
 									_elm_lang$core$List$concat(
-										_user$project$Main$prepareVariantValues(_p16.variants))),
+										_user$project$Main$prepareVariantValues(_p15.variants))),
 								variantSelected: A3(
 									_elm_lang$core$Basics$flip,
 									_elm_lang$core$List$repeat,
 									'❌',
-									_elm_lang$core$List$length(_p16.variantsTypes))
+									_elm_lang$core$List$length(_p15.variantsTypes))
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
@@ -13228,7 +13256,7 @@ var _user$project$Main$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{payloadJson: _p10._0}),
+						{payloadJson: _p9._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
@@ -13241,8 +13269,15 @@ var _user$project$Main$viewItem = F5(
 	function (model, checkedStatus, attribute, value, index) {
 		var newVariantSelected = _user$project$Main$joiner(
 			A3(_user$project$Main$listSet, index, value, model.variantSelected));
-		var presentData = A2(_elm_lang$core$Dict$get, newVariantSelected, model.variants);
-		var disabledStatus = _elm_lang$core$Native_Utils.eq(presentData, _elm_lang$core$Maybe$Nothing);
+		var variantCombination = function () {
+			var _p16 = A2(_elm_lang$core$Dict$get, newVariantSelected, model.variants);
+			if (_p16.ctor === 'Just') {
+				return _p16._0;
+			} else {
+				return _user$project$Main$emptyVariantCombination;
+			}
+		}();
+		var disabledStatus = _elm_lang$core$Native_Utils.cmp(variantCombination.available, 0) < 1;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -13286,7 +13321,7 @@ var _user$project$Main$viewItem = F5(
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html$text(
-								_user$project$Main$formatPriceAndAvailability(presentData)),
+								_user$project$Main$formatPriceAndAvailability(variantCombination)),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}
@@ -13371,33 +13406,19 @@ var _user$project$Main$view = function (model) {
 			});
 	} else {
 		var presentSelection = _user$project$Main$joiner(model.variantSelected);
-		var presentData = A2(_elm_lang$core$Dict$get, presentSelection, model.variants);
-		var variationsQuantity = function () {
-			var _p18 = presentData;
+		var variantCombination = function () {
+			var _p18 = A2(_elm_lang$core$Dict$get, presentSelection, model.variants);
 			if (_p18.ctor === 'Just') {
-				return _elm_lang$core$List$length(_p18._0.ids);
+				return _p18._0;
 			} else {
-				return 0;
+				return _user$project$Main$emptyVariantCombination;
 			}
 		}();
-		var stock = function () {
-			var _p19 = presentData;
-			if (_p19.ctor === 'Just') {
-				return _p19._0.available;
-			} else {
-				return 0;
-			}
-		}();
-		var ctaDisabled = function () {
-			var _p20 = presentData;
-			if (_p20.ctor === 'Just') {
-				return _elm_lang$core$Native_Utils.cmp(
-					_elm_lang$core$List$length(_p20._0.ids),
-					1) > 0;
-			} else {
-				return true;
-			}
-		}();
+		var variationsQuantity = _elm_lang$core$List$length(variantCombination.ids);
+		var stock = variantCombination.available;
+		var stillMoreThanOneVariant = _elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(variantCombination.ids),
+			1) > 0;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -13439,7 +13460,7 @@ var _user$project$Main$view = function (model) {
 													return A2(_elm_lang$core$Basics_ops['++'], x, y);
 												}),
 											'Price ',
-											_user$project$Main$formatPriceAndAvailability(presentData))),
+											_user$project$Main$formatPriceAndAvailability(variantCombination))),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -13447,21 +13468,94 @@ var _user$project$Main$view = function (model) {
 								_0: A2(
 									_elm_lang$html$Html$p,
 									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text(
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												'Variants: ',
-												A2(
-													_elm_lang$core$Basics_ops['++'],
-													_elm_lang$core$Basics$toString(variationsQuantity),
-													A2(
-														_elm_lang$core$Basics_ops['++'],
-														', Stock: ',
-														_elm_lang$core$Basics$toString(stock))))),
-										_1: {ctor: '[]'}
-									}),
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Variants: '),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													_elm_lang$core$Basics$toString(variationsQuantity)),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(', Stock: '),
+													_1: {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(
+															_elm_lang$core$Basics$toString(stock)),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html$text(', Selected: '),
+															_1: {ctor: '[]'}
+														}
+													}
+												}
+											}
+										},
+										function () {
+											if (_elm_lang$core$Native_Utils.eq(variationsQuantity, 1)) {
+												var _p19 = _elm_lang$core$List$head(variantCombination.ids);
+												if (_p19.ctor === 'Just') {
+													var payload = _user$project$Main$getPayload(model.payload);
+													var variantValues = function () {
+														var _p20 = A2(_user$project$Main$findVariant, payload.variants, _p19._0);
+														if (_p20.ctor === 'Just') {
+															return _p20._0.variantValues;
+														} else {
+															return _user$project$Main$emptyVariant.variantValues;
+														}
+													}();
+													return A2(
+														_elm_lang$core$List$map,
+														function (item) {
+															return A2(
+																_elm_lang$html$Html$span,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('selected'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text(item),
+																	_1: {ctor: '[]'}
+																});
+														},
+														variantValues);
+												} else {
+													return {
+														ctor: '::',
+														_0: _elm_lang$html$Html$text(''),
+														_1: {ctor: '[]'}
+													};
+												}
+											} else {
+												var filterVariantSelected = A2(
+													_elm_lang$core$List$filter,
+													function (item) {
+														return !_elm_lang$core$Native_Utils.eq(item, '❌');
+													},
+													model.variantSelected);
+												return A2(
+													_elm_lang$core$List$map,
+													function (item) {
+														return A2(
+															_elm_lang$html$Html$span,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('selected'),
+																_1: {ctor: '[]'}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text(item),
+																_1: {ctor: '[]'}
+															});
+													},
+													filterVariantSelected);
+											}
+										}())),
 								_1: {
 									ctor: '::',
 									_0: A2(
@@ -13474,19 +13568,19 @@ var _user$project$Main$view = function (model) {
 													_0: A2(_user$project$Main_ops['=>'], 'cta', true),
 													_1: {
 														ctor: '::',
-														_0: A2(_user$project$Main_ops['=>'], 'disabled', ctaDisabled),
+														_0: A2(_user$project$Main_ops['=>'], 'disabled', stillMoreThanOneVariant),
 														_1: {ctor: '[]'}
 													}
 												}),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$disabled(ctaDisabled),
+												_0: _elm_lang$html$Html_Attributes$disabled(stillMoreThanOneVariant),
 												_1: {ctor: '[]'}
 											}
 										},
 										{
 											ctor: '::',
-											_0: ctaDisabled ? _elm_lang$html$Html$text('Select a Product') : _elm_lang$html$Html$text('Add to Cart'),
+											_0: stillMoreThanOneVariant ? _elm_lang$html$Html$text('Select a Product') : _elm_lang$html$Html$text('Add to Cart'),
 											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
@@ -13615,17 +13709,39 @@ var _user$project$Main$view = function (model) {
 																	_elm_lang$html$Html$a,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$href('combinationGenerator.html'),
+																		_0: _elm_lang$html$Html_Attributes$href('https://lucamug.github.io/elm-faceted-variations/'),
 																		_1: {ctor: '[]'}
 																	},
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html$text('Combination Generator'),
+																		_0: _elm_lang$html$Html$text('Demo'),
 																		_1: {ctor: '[]'}
 																	}),
 																_1: {ctor: '[]'}
 															}),
-														_1: {ctor: '[]'}
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$li,
+																{ctor: '[]'},
+																{
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$a,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$href('https://lucamug.github.io/elm-faceted-variations/combinationGenerator.html'),
+																			_1: {ctor: '[]'}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Combination Generator'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}
 													}
 												}
 											}),

@@ -46,6 +46,15 @@ type alias Variant =
     }
 
 
+emptyVariant : Variant
+emptyVariant =
+    { id = ""
+    , variantValues = []
+    , price = 0
+    , available = 0
+    }
+
+
 type alias VariantValues =
     List String
 
@@ -56,11 +65,27 @@ type alias Payload =
     }
 
 
+emptyPayload : Payload
+emptyPayload =
+    { variantsTypes = []
+    , variants = []
+    }
+
+
 type alias VariantCombination =
     { minPrice : Float
     , maxPrice : Float
     , available : Int
     , ids : List String
+    }
+
+
+emptyVariantCombination : VariantCombination
+emptyVariantCombination =
+    { minPrice = 0
+    , maxPrice = 0
+    , available = 0
+    , ids = []
     }
 
 
@@ -101,11 +126,16 @@ viewItem model checkedStatus attribute value index =
         newVariantSelected =
             joiner (listSet index value model.variantSelected)
 
-        presentData =
-            Dict.get newVariantSelected model.variants
-
         disabledStatus =
-            presentData == Nothing
+            variantCombination.available <= 0
+
+        variantCombination =
+            case Dict.get newVariantSelected model.variants of
+                Just data ->
+                    data
+
+                Nothing ->
+                    emptyVariantCombination
     in
         div
             [ classList
@@ -121,7 +151,7 @@ viewItem model checkedStatus attribute value index =
                 onClick (SwitchTo ( index, value ))
             ]
             [ text value
-            , span [ class "right" ] [ text (formatPriceAndAvailability presentData) ]
+            , span [ class "right" ] [ text (formatPriceAndAvailability variantCombination) ]
             ]
 
 
@@ -130,18 +160,20 @@ formatPrice price =
     "$" ++ (Round.round 2 price)
 
 
-formatPriceAndAvailability : Maybe { b | minPrice : Float, maxPrice : Float } -> String
-formatPriceAndAvailability data =
-    case data of
-        Just data2 ->
-            -- data2
-            if data2.minPrice == data2.maxPrice then
-                (formatPrice data2.minPrice)
-            else
-                (formatPrice data2.minPrice) ++ " ~ " ++ (formatPrice data2.maxPrice)
+formatPriceAndAvailability : VariantCombination -> String
+formatPriceAndAvailability variantCombination =
+    if variantCombination.available > 0 then
+        if variantCombination.minPrice == variantCombination.maxPrice then
+            (formatPrice variantCombination.minPrice)
+        else
+            (formatPrice variantCombination.minPrice) ++ " ~ " ++ (formatPrice variantCombination.maxPrice)
+    else
+        "Out of stock"
 
-        Nothing ->
-            "Out of stock"
+
+findVariant : List Variant -> String -> Maybe Variant
+findVariant variants id =
+    List.head (List.filter (\item -> item.id == id) variants)
 
 
 viewItemSection : Model -> VariantType -> Int -> Html Msg
@@ -170,6 +202,16 @@ viewJsonForm model =
         ]
 
 
+getPayload : Maybe Payload -> Payload
+getPayload payload =
+    case payload of
+        Just data ->
+            data
+
+        Nothing ->
+            emptyPayload
+
+
 view : Model -> Html Msg
 view model =
     case model.payload of
@@ -184,49 +226,72 @@ view model =
                 presentSelection =
                     (joiner model.variantSelected)
 
-                presentData =
-                    Dict.get presentSelection model.variants
+                variantCombination =
+                    case Dict.get presentSelection model.variants of
+                        Just data ->
+                            data
+
+                        Nothing ->
+                            emptyVariantCombination
 
                 variationsQuantity =
-                    case presentData of
-                        Just data ->
-                            List.length data.ids
-
-                        Nothing ->
-                            0
+                    List.length variantCombination.ids
 
                 stock =
-                    case presentData of
-                        Just data ->
-                            data.available
+                    variantCombination.available
 
-                        Nothing ->
-                            0
-
-                ctaDisabled =
-                    case presentData of
-                        Just data ->
-                            (List.length data.ids) > 1
-
-                        Nothing ->
-                            True
+                stillMoreThanOneVariant =
+                    (List.length variantCombination.ids) > 1
             in
                 div
                     [ class "main" ]
                     [ node "style" [] [ text css ]
                     , div [ class "header" ]
                         [ h1 []
-                            [ presentData |> formatPriceAndAvailability |> (++) "Price " |> text
+                            [ variantCombination |> formatPriceAndAvailability |> (++) "Price " |> text
                             ]
-                        , p [] [ ("Variants: " ++ (variationsQuantity |> toString) ++ ", Stock: " ++ (stock |> toString)) |> text ]
+                        , p []
+                            ([ text "Variants: "
+                             , text (variationsQuantity |> toString)
+                             , text ", Stock: "
+                             , text (stock |> toString)
+                             , text ", Selected: "
+                             ]
+                                ++ (if variationsQuantity == 1 then
+                                        case List.head variantCombination.ids of
+                                            Just id ->
+                                                let
+                                                    payload =
+                                                        getPayload model.payload
+
+                                                    variantValues =
+                                                        case findVariant payload.variants id of
+                                                            Just data ->
+                                                                data.variantValues
+
+                                                            Nothing ->
+                                                                emptyVariant.variantValues
+                                                in
+                                                    (List.map (\item -> span [ class "selected" ] [ text item ]) variantValues)
+
+                                            Nothing ->
+                                                [ text "" ]
+                                    else
+                                        let
+                                            filterVariantSelected =
+                                                List.filter (\item -> item /= "❌") model.variantSelected
+                                        in
+                                            (List.map (\item -> span [ class "selected" ] [ text item ]) filterVariantSelected)
+                                   )
+                            )
                         , button
                             [ classList
                                 [ "cta" => True
-                                , "disabled" => ctaDisabled
+                                , "disabled" => stillMoreThanOneVariant
                                 ]
-                            , disabled ctaDisabled
+                            , disabled stillMoreThanOneVariant
                             ]
-                            [ if ctaDisabled then
+                            [ if stillMoreThanOneVariant then
                                 text "Select a Product"
                               else
                                 text "Add to Cart"
@@ -249,7 +314,8 @@ view model =
                         , ul []
                             [ li [] [ a [ href "https://github.com/lucamug/elm-faceted-variations" ] [ text "Source Code" ] ]
                             , li [] [ a [ href "" ] [ text "Post" ] ]
-                            , li [] [ a [ href "combinationGenerator.html" ] [ text "Combination Generator" ] ]
+                            , li [] [ a [ href "https://lucamug.github.io/elm-faceted-variations/" ] [ text "Demo" ] ]
+                            , li [] [ a [ href "https://lucamug.github.io/elm-faceted-variations/combinationGenerator.html" ] [ text "Combination Generator" ] ]
                             ]
                         ]
                     ]
@@ -608,6 +674,12 @@ a {
     margin: 6px 0;
     cursor: pointer;
     border: 3px solid white;
+}
+.selected {
+    background-color: #ff73cc;
+    color: white;
+    padding: 3px 6px;
+    margin: 0 2px;
 }
 .cta {
     background-color: #ff73cc;
